@@ -1,0 +1,11 @@
+List all salesmen and indicate those who have and don’t have customers in their cities:
+sql
+Copy code
+SELECT s.Name AS Salesman_Name, s.Salesman_id AS Salesman_ID,
+    CASE
+        WHEN COUNT(c.Customer_id) > 0 THEN 'Has Customers'
+        ELSE 'No Customers'
+    END AS Customer_Status
+FROM SALESMAN s
+LEFT JOIN CUSTOMER c ON s.Salesman_id = c.Salesman_id AND s.City = c.City
+GROUP BY s.Salesman_id, s.Name, s.City;
